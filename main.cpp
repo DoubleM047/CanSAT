@@ -116,7 +116,7 @@ int main(){
 
         }
         else{
-            cout <<"niso nasi opodatki \n";
+            cout <<"niso nasi podatki \n";
         }
     }
     
