@@ -4,10 +4,12 @@ typedef long long ll;
 
 using namespace std;
 
+short beep = 0;
+
 string senzor10(char pr){
-    pr = pr >> 1;
-    if(pr&1){
-        return "10";
+    pr = pr >> 1; //bit shiftamo desno 1x da pride bit ki ga gledamo na skarjno desno mesto
+    if(pr&1){   //preverimo ce je setan
+        return "10"; 
     }
     return "";
 }
@@ -94,14 +96,23 @@ string receive(){
     return a;
 }
 
+void beepOnOff(char pr){
+    pr = pr >> 7;
+    if(pr&1){
+        beep++;
+        beep%=2; //zamenjamo bip na stanje nasprotno stanju pred menjavo
+    }
+}
+
 int main(){
     while(1){
         string poslat = "";
         string navodila = receive();
-        if(navodila[0]=='`'){
+        if(navodila[0]=='`'){  //preverimo podpis
             navodila.erase(navodila.begin());
-            char pr = navodila[0];
+            char pr = navodila[0]; //razdelimo na 1. in 2. byte
             char dr = navodila[1];
+            beepOnOff(pr); 
             poslat += senzor10(pr);
             poslat += senzor9(pr);
             poslat += senzor8(dr);
